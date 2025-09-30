@@ -216,21 +216,56 @@ function App() {
   const enabledCertifications = certifications.filter(cert => cert.enabled);
 
   return (
-    <div className="min-h-screen bg-[#EEE8F8] py-6 sm:py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 bg-[#4C26C7]/10 text-[#4C26C7] px-4 py-2 rounded-full text-sm font-medium mb-4">
+    <div className="min-h-screen bg-[#EEE8F8]">
+      {/* Navbar */}
+      <nav className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <div className="text-2xl font-bold text-[#4C26C7]">Logo</div>
+            </div>
+
+            {/* Center Navigation Items */}
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#servicios" className="text-gray-700 hover:text-[#4C26C7] transition-colors font-medium">
+                Servicios
+              </a>
+              <a href="#soluciones" className="text-gray-700 hover:text-[#4C26C7] transition-colors font-medium">
+                Soluciones
+              </a>
+              <a href="#recursos" className="text-gray-700 hover:text-[#4C26C7] transition-colors font-medium">
+                Recursos
+              </a>
+            </div>
+
+            {/* Contact Button */}
+            <div>
+              <button className="bg-[#4C26C7] hover:bg-[#4C26C7]/90 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                Contacto
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <div className="bg-gradient-to-br from-[#4C26C7] to-[#6B46E5] text-white py-20 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
             <Calculator className="w-4 h-4" />
             Cotizador de licencias
           </div>
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-4 px-2">
-            Calcula tu mejor opción y cotiza tus licencias
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Calcula tu mejor opción y <br />cotiza tus licencias
           </h1>
-          <p className="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto px-2">
-            Selecciona las licencias que necesitas y obtén un cálculo detallado
+          <p className="text-lg sm:text-xl text-white/90 max-w-3xl mx-auto mb-8">
+            Selecciona las licencias que necesitas y obtén un cálculo detallado con el mejor precio del mercado
           </p>
         </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 py-6 sm:py-12">
 
         <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 bg-[#FFFFFF] p-4 sm:p-6 lg:p-10 rounded-2xl lg:rounded-3xl border border-2 border-gray-200">
           {/* License Selection */}
@@ -460,14 +495,6 @@ function App() {
                                   ? 'border-[#4C26C7] bg-[#4C26C7]/5 shadow-md'
                                   : 'border-gray-200 hover:border-[#4C26C7]/50 hover:bg-gray-50'
                               }`}
-                              onClick={() => {
-                                const currentSelected = cert.selectedSubOptions || [];
-                                const isSelected = currentSelected.includes(option.id);
-                                const newSelected = isSelected
-                                  ? currentSelected.filter(id => id !== option.id)
-                                  : [...currentSelected, option.id];
-                                updateCertification(cert.id, { selectedSubOptions: newSelected });
-                              }}
                               onClick={(e) => {
                                 e.stopPropagation();
                                 const currentSelected = cert.selectedSubOptions || [];
