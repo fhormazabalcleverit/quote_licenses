@@ -931,6 +931,99 @@ function App() {
         </div>
       </div>
 
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            {/* Brand Section */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-8 h-8 bg-[#4C26C7] rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">LL</span>
+                </div>
+                <div>
+                  <span className="text-xl font-bold">LLMApp</span>
+                  <span className="text-gray-400 text-sm ml-2">by CleverIT</span>
+                </div>
+              </div>
+              <p className="text-gray-400 mb-6 leading-relaxed">
+                Transformamos negocios con soluciones de IA personalizadas que impulsan la innovación y el crecimiento.
+              </p>
+              <a
+                href="mailto:info@llmaps.com"
+                className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
+              >
+                <Mail className="w-4 h-4" />
+                info@llmaps.com
+              </a>
+            </div>
+
+            {/* Links Section */}
+            <div>
+              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
+                LINK
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <a href="#style-guide" className="text-gray-300 hover:text-white transition-colors">
+                    Style Guide
+                  </a>
+                </li>
+                <li>
+                  <a href="#instrucciones" className="text-gray-300 hover:text-white transition-colors">
+                    Instrucciones
+                  </a>
+                </li>
+                <li>
+                  <a href="#licencias" className="text-gray-300 hover:text-white transition-colors">
+                    Licencias
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Social Section */}
+            <div>
+              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
+                SOCIAL
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <a href="#facebook" className="text-gray-300 hover:text-white transition-colors">
+                    Facebook
+                  </a>
+                </li>
+                <li>
+                  <a href="#twitter" className="text-gray-300 hover:text-white transition-colors">
+                    Twitter
+                  </a>
+                </li>
+                <li>
+                  <a href="#youtube" className="text-gray-300 hover:text-white transition-colors">
+                    YouTube
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="text-gray-400 text-sm text-center sm:text-left">
+              Creado por <span className="font-semibold text-white">CleverIT</span>, 2025 LLMApps. Todos los derechos reservados.
+            </div>
+            <div className="flex gap-6 text-sm">
+              <a href="#terminos" className="text-gray-400 hover:text-white transition-colors">
+                Términos de Servicio
+              </a>
+              <a href="#privacidad" className="text-gray-400 hover:text-white transition-colors">
+                Política de Privacidad
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
       <style jsx>{`
         .slider::-webkit-slider-thumb {
           appearance: none;
