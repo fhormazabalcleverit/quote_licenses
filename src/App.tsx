@@ -942,7 +942,7 @@ function App() {
                   <span className="text-white font-bold text-sm">LL</span>
                 </div>
                 <div>
-                  <span className="text-xl font-bold">LLMApp</span>
+                  <span className="text-xl font-bold">Licencias</span>
                   <span className="text-gray-400 text-sm ml-2">by CleverIT</span>
                 </div>
               </div>
@@ -950,7 +950,7 @@ function App() {
                 Transformamos negocios con soluciones de IA personalizadas que impulsan la innovación y el crecimiento.
               </p>
               <a
-                href="mailto:info@llmaps.com"
+                href="mailto:licencias@cleveritgroup.com"
                 className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
               >
                 <Mail className="w-4 h-4" />
