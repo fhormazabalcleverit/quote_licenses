@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Check, Calculator, FileText, Award, Users, Mail } from 'lucide-react';
+import { Check, Calculator, FileText, Award, Users, Mail, ChevronDown } from 'lucide-react';
 
 interface Certification {
   id: string;
@@ -96,8 +96,40 @@ function App() {
 
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const TAX_RATE = 0.19; // 19% IVA
+
+  const faqs = [
+    {
+      question: '¿Qué incluyen las licencias de GitHub Enterprise?',
+      answer: 'Las licencias de GitHub Enterprise incluyen acceso completo a la plataforma de desarrollo colaborativo de GitHub, con funciones avanzadas de seguridad, administración centralizada, soporte prioritario 24/7, y herramientas para equipos empresariales.'
+    },
+    {
+      question: '¿Cómo funciona el precio combinado de GitHub Advance Security?',
+      answer: 'Al seleccionar tanto Code Security como Secret Security, obtienes un precio especial combinado de $49 por licencia, lo que representa un ahorro significativo comparado con adquirirlos por separado. Este paquete te brinda protección completa para tu código y secretos.'
+    },
+    {
+      question: '¿Cuál es el número mínimo de licencias que puedo adquirir?',
+      answer: 'El número mínimo de licencias varía según el producto: GitHub Enterprise requiere mínimo 50 licencias, GitHub Copilot 20 licencias, y GitHub Advance Security 30 licencias para Code Security y 50 para Secret Security.'
+    },
+    {
+      question: '¿El IVA está incluido en el precio mostrado?',
+      answer: 'No, el IVA (19%) se calcula y muestra por separado en el resumen de tu cotización. El precio por licencia que ves es antes de impuestos.'
+    },
+    {
+      question: '¿Qué tipo de soporte recibo después de la compra?',
+      answer: 'Todas nuestras licencias incluyen capacitación del servicio y soporte posterior a la compra. Nuestro equipo te ayudará con la configuración inicial, onboarding de usuarios, y resolución de dudas técnicas.'
+    },
+    {
+      question: '¿Puedo cambiar la cantidad de licencias después de la compra?',
+      answer: 'Sí, puedes ajustar la cantidad de licencias según las necesidades de tu equipo. Contáctanos para escalar o reducir tu plan según tus requerimientos.'
+    }
+  ];
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
 
   useEffect(() => {
     const enabledCerts = certifications.filter(cert => cert.enabled);
@@ -851,6 +883,50 @@ function App() {
                 )}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="max-w-4xl mx-auto mt-16 mb-12">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Preguntas Frecuentes
+            </h2>
+            <p className="text-lg text-gray-600">
+              Resuelve tus dudas sobre nuestras licencias
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl border border-gray-200 overflow-hidden transition-all duration-300"
+              >
+                <button
+                  onClick={() => toggleFaq(index)}
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="font-semibold text-gray-900 pr-4">
+                    {faq.question}
+                  </span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-[#4C26C7] flex-shrink-0 transition-transform duration-300 ${
+                      openFaqIndex === index ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    openFaqIndex === index ? 'max-h-96' : 'max-h-0'
+                  }`}
+                >
+                  <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
