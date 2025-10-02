@@ -305,7 +305,7 @@ function App() {
 
       <div className="max-w-6xl mx-auto px-4 py-6 sm:py-12">
 
-        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 bg-[#FFFFFF] p-4 sm:p-6 lg:p-10 rounded-2xl lg:rounded-3xl border border-2 border-gray-200 relative -top-24 border-2 border-cyan-500 to border-purple-400">
+        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 bg-[#FFFFFF] p-4 sm:p-6 lg:p-10 rounded-2xl lg:rounded-3xl border border-2 border-gray-200 relative -top-24">
           {/* License Selection */}
           <div className="lg:col-span-2 space-y-4 lg:space-y-6">
             <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
