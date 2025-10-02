@@ -282,8 +282,14 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-[#4C26C7] to-[#6B46E5] text-white py-20 px-4">
-        <div className="max-w-6xl mx-auto text-center">
+      <div
+        className="bg-gradient-to-br from-[#4C26C7] to-[#6B46E5] text-white py-20 px-4 relative bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(https://ghlicensedeskdevqa.blob.core.windows.net/github-cotizador/Banner.svg)',
+          backgroundBlendMode: 'overlay'
+        }}
+      >
+        <div className="max-w-6xl mx-auto text-center relative z-10">
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
             <Calculator className="w-4 h-4" />
             Cotizador de licencias
