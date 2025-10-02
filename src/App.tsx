@@ -255,7 +255,7 @@ function App() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <div className="text-2xl font-bold text-[#4C26C7]">Logo</div>
+              <img src="/cleverit.png" alt="CleverIT" className="h-8" />
             </div>
 
             {/* Center Navigation Items */}
