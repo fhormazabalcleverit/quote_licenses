@@ -97,6 +97,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [showQuotationSummary, setShowQuotationSummary] = useState(false);
 
   const TAX_RATE = 0.19; // 19% IVA
 
@@ -246,6 +247,293 @@ function App() {
   };
 
   const enabledCertifications = certifications.filter(cert => cert.enabled);
+
+  const handleQuotation = () => {
+    if (email && !emailError && enabledCertifications.length > 0) {
+      setShowQuotationSummary(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleBackToQuotation = () => {
+    setShowQuotationSummary(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleConfirmQuotation = () => {
+    alert('Cotización enviada con éxito. Nos pondremos en contacto contigo pronto.');
+    setShowQuotationSummary(false);
+  };
+
+  if (showQuotationSummary) {
+    return (
+      <div className="min-h-screen bg-[#EEE8F8]">
+        {/* Navbar */}
+        <nav className="bg-white border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+              <div className="flex-shrink-0">
+                <img src="/cleverit.png" alt="CleverIT" className="h-8" />
+              </div>
+              <div className="hidden md:flex items-center space-x-8">
+                <a href="#servicios" className="text-gray-700 hover:text-[#4C26C7] transition-colors font-medium">
+                  Servicios
+                </a>
+                <a href="#soluciones" className="text-gray-700 hover:text-[#4C26C7] transition-colors font-medium">
+                  Soluciones
+                </a>
+                <a href="#recursos" className="text-gray-700 hover:text-[#4C26C7] transition-colors font-medium">
+                  Recursos
+                </a>
+              </div>
+              <div>
+                <button className="bg-[#4C26C7] hover:bg-[#4C26C7]/90 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                  Contacto
+                </button>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        {/* Summary Page Content */}
+        <div className="max-w-4xl mx-auto px-4 py-12">
+          <button
+            onClick={handleBackToQuotation}
+            className="text-[#4C26C7] hover:text-[#4C26C7]/80 mb-6 flex items-center gap-2 font-medium"
+          >
+            ← Volver al cotizador
+          </button>
+
+          <div className="bg-white rounded-3xl shadow-lg p-8 mb-6">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Resumen de tu Cotización</h1>
+            <p className="text-gray-600 mb-8">Revisa los detalles de tu selección antes de confirmar</p>
+
+            {/* Contact Info */}
+            <div className="mb-8 p-4 bg-gray-50 rounded-xl">
+              <h2 className="text-sm font-semibold text-gray-600 mb-2">Información de Contacto</h2>
+              <p className="text-lg font-medium text-gray-900">{email}</p>
+            </div>
+
+            {/* Selected Licenses */}
+            <div className="mb-8">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">Licencias Seleccionadas</h2>
+              <div className="space-y-6">
+                {enabledCertifications.map((cert) => (
+                  <div key={cert.id} className="border border-gray-200 rounded-xl p-6">
+                    <div className="flex items-start gap-4 mb-4">
+                      <img src={cert.image} alt={cert.name} className="w-16 h-16 object-cover rounded-lg" />
+                      <div className="flex-1">
+                        <h3 className="text-lg font-bold text-gray-900">{cert.name}</h3>
+                        <p className="text-sm text-gray-600">{cert.description}</p>
+                      </div>
+                    </div>
+
+                    {cert.subOptions && cert.selectedSubOptions && cert.selectedSubOptions.length > 0 ? (
+                      <div className="space-y-3 pl-20">
+                        {cert.selectedSubOptions.includes('copilot-enterprise') &&
+                         cert.selectedSubOptions.includes('copilot-business') ? (
+                          <div className="bg-gray-50 rounded-lg p-4">
+                            <p className="font-semibold text-gray-900 mb-2">Combo: Enterprise + Business</p>
+                            <p className="text-sm text-gray-600">
+                              {cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20} licencias Enterprise × $39 +{' '}
+                              {cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20} licencias Business × $19
+                            </p>
+                            <p className="text-lg font-bold text-[#4C26C7] mt-2">
+                              {formatPrice(
+                                (cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20) * 39 +
+                                (cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20) * 19
+                              )}
+                            </p>
+                          </div>
+                        ) : cert.selectedSubOptions.includes('code-security') &&
+                               cert.selectedSubOptions.includes('secret-security') ? (
+                          <div className="bg-gray-50 rounded-lg p-4">
+                            <p className="font-semibold text-gray-900 mb-2">Combo: Code + Secret Security</p>
+                            <p className="text-sm text-gray-600">
+                              Máximo entre {cert.subOptions?.find(opt => opt.id === 'code-security')?.licenses || 30} y{' '}
+                              {cert.subOptions?.find(opt => opt.id === 'secret-security')?.licenses || 50} licencias × $49
+                            </p>
+                            <p className="text-lg font-bold text-[#4C26C7] mt-2">
+                              {formatPrice(
+                                Math.max(
+                                  cert.subOptions?.find(opt => opt.id === 'code-security')?.licenses || 30,
+                                  cert.subOptions?.find(opt => opt.id === 'secret-security')?.licenses || 50
+                                ) * 49
+                              )}
+                            </p>
+                          </div>
+                        ) : (
+                          cert.selectedSubOptions.map((optionId) => {
+                            const option = cert.subOptions!.find(opt => opt.id === optionId);
+                            if (!option) return null;
+                            return (
+                              <div key={optionId} className="bg-gray-50 rounded-lg p-4">
+                                <p className="font-semibold text-gray-900 mb-1">{option.name}</p>
+                                <p className="text-sm text-gray-600">
+                                  {option.licenses || 20} licencias × {formatPrice(option.pricePerLicense)}
+                                </p>
+                                <p className="text-lg font-bold text-[#4C26C7] mt-2">
+                                  {formatPrice((option.licenses || 20) * option.pricePerLicense)}
+                                </p>
+                              </div>
+                            );
+                          })
+                        )}
+                      </div>
+                    ) : (
+                      <div className="bg-gray-50 rounded-lg p-4 ml-20">
+                        <p className="text-sm text-gray-600 mb-1">
+                          {cert.licenses} licencias × {formatPrice(cert.pricePerLicense)}
+                        </p>
+                        <p className="text-lg font-bold text-[#4C26C7]">
+                          {formatPrice(cert.licenses * cert.pricePerLicense)}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Price Summary */}
+            <div className="border-t border-gray-200 pt-6">
+              <div className="space-y-3 mb-6">
+                <div className="flex justify-between text-base">
+                  <span className="text-gray-600">Subtotal</span>
+                  <span className="font-semibold text-gray-900">{formatPrice(totals.subtotal)}</span>
+                </div>
+                <div className="flex justify-between text-base">
+                  <span className="text-gray-600">IVA (19%)</span>
+                  <span className="font-semibold text-gray-900">{formatPrice(totals.tax)}</span>
+                </div>
+                <div className="flex justify-between text-xl font-bold border-t pt-3">
+                  <span className="text-gray-900">Total</span>
+                  <span className="text-[#4C26C7]">{formatPrice(totals.total)}</span>
+                </div>
+                <div className="text-sm text-gray-500 text-right">
+                  Total de licencias: {totals.totalLicenses}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="space-y-3">
+                <button
+                  onClick={handleConfirmQuotation}
+                  className="w-full bg-[#4C26C7] hover:bg-[#4C26C7]/90 text-white font-semibold py-4 px-6 rounded-2xl transition-colors"
+                >
+                  Confirmar y Enviar Cotización
+                </button>
+                <button
+                  onClick={handleBackToQuotation}
+                  className="w-full border border-gray-300 hover:border-gray-400 text-gray-700 font-semibold py-4 px-6 rounded-2xl transition-colors"
+                >
+                  Modificar Selección
+                </button>
+              </div>
+
+              {/* Additional Info */}
+              <div className="mt-6 p-4 bg-blue-50 rounded-xl">
+                <p className="text-sm text-gray-700 mb-2">
+                  <strong>Incluye:</strong>
+                </p>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  <li>• Capacitación del servicio</li>
+                  <li>• Soporte posterior a la compra</li>
+                  <li>• Asesoría personalizada</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <footer className="bg-gray-900 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 bg-[#4C26C7] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">LL</span>
+                  </div>
+                  <div>
+                    <span className="text-xl font-bold">LLMApp</span>
+                    <span className="text-gray-400 text-sm ml-2">by CleverIT</span>
+                  </div>
+                </div>
+                <p className="text-gray-400 mb-6 leading-relaxed">
+                  Transformamos negocios con soluciones de IA personalizadas que impulsan la innovación y el crecimiento.
+                </p>
+                <a
+                  href="mailto:info@llmaps.com"
+                  className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
+                >
+                  <Mail className="w-4 h-4" />
+                  info@llmaps.com
+                </a>
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
+                  LINK
+                </h3>
+                <ul className="space-y-3">
+                  <li>
+                    <a href="#style-guide" className="text-gray-300 hover:text-white transition-colors">
+                      Style Guide
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#instrucciones" className="text-gray-300 hover:text-white transition-colors">
+                      Instrucciones
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#licencias" className="text-gray-300 hover:text-white transition-colors">
+                      Licencias
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
+                  SOCIAL
+                </h3>
+                <ul className="space-y-3">
+                  <li>
+                    <a href="#facebook" className="text-gray-300 hover:text-white transition-colors">
+                      Facebook
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#twitter" className="text-gray-300 hover:text-white transition-colors">
+                      Twitter
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#youtube" className="text-gray-300 hover:text-white transition-colors">
+                      YouTube
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+              <div className="text-gray-400 text-sm text-center sm:text-left">
+                Creado por <span className="font-semibold text-white">CleverIT</span>, 2025 LLMApps. Todos los derechos reservados.
+              </div>
+              <div className="flex gap-6 text-sm">
+                <a href="#terminos" className="text-gray-400 hover:text-white transition-colors">
+                  Términos de Servicio
+                </a>
+                <a href="#privacidad" className="text-gray-400 hover:text-white transition-colors">
+                  Política de Privacidad
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#EEE8F8]">
@@ -857,18 +1145,19 @@ function App() {
 
                     {/* Action Buttons */}
                     <div className="pt-4 space-y-3">
-                      <button 
-                        disabled={!email || !!emailError}
+                      <button
+                        onClick={handleQuotation}
+                        disabled={!email || !!emailError || enabledCertifications.length === 0}
                         className={`w-full font-semibold py-3 px-4 rounded-2xl sm:rounded-3xl transition-colors text-sm sm:text-base ${
-                          email && !emailError
+                          email && !emailError && enabledCertifications.length > 0
                             ? 'bg-[#4C26C7] hover:bg-[#4C26C7]/90 text-white cursor-pointer'
                             : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                         }`}
                       >
                         Cotizar
                       </button>
-                      
-                      <button 
+
+                      <button
                         disabled={!email || !!emailError}
                         className={`w-full font-semibold py-3 px-4 rounded-2xl sm:rounded-3xl transition-colors text-sm sm:text-base ${
                           email && !emailError
