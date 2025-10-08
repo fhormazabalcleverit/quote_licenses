@@ -304,45 +304,45 @@ function App() {
             ← Volver al cotizador
           </button>
 
-          <div className="grid lg:grid-cols-3 gap-6">
+          <div className="grid lg:grid-cols-3 gap-4 lg:gap-6">
             {/* Left Column - Summary */}
-            <div className="lg:col-span-2 bg-white rounded-3xl shadow-lg p-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Resumen de tu cotización</h1>
-              <p className="text-gray-600 mb-8">Revisa los detalles de tu selección antes de confirmar</p>
+            <div className="lg:col-span-2 bg-white rounded-2xl sm:rounded-3xl shadow-lg p-4 sm:p-6 lg:p-8">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Resumen de tu cotización</h1>
+              <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8">Revisa los detalles de tu selección antes de confirmar</p>
 
               {/* Contact Info */}
-              <div className="mb-8 p-4 bg-gray-50 rounded-xl">
-                <h2 className="text-sm font-semibold text-gray-600 mb-2">Información de contacto</h2>
-                <p className="text-lg font-medium text-gray-900">{email}</p>
+              <div className="mb-6 sm:mb-8 p-4 bg-gray-50 rounded-xl">
+                <h2 className="text-xs sm:text-sm font-semibold text-gray-600 mb-2">Información de contacto</h2>
+                <p className="text-base sm:text-lg font-medium text-gray-900 break-all">{email}</p>
               </div>
 
               {/* Selected Licenses */}
               <div>
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Licencias seleccionadas</h2>
-                <div className="space-y-6">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Licencias seleccionadas</h2>
+                <div className="space-y-4 sm:space-y-6">
                   {enabledCertifications.map((cert) => (
-                    <div key={cert.id} className="border border-gray-200 rounded-xl p-6">
-                      <div className="flex items-center gap-6">
+                    <div key={cert.id} className="border border-gray-200 rounded-xl p-4 sm:p-6">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
                         {/* COL-UNO: Logo + Título/Descripción */}
-                        <div id="col-uno" className="flex items-center gap-4 flex-1 min-w-0">
-                          <img src={cert.image} alt={cert.name} className="w-8 h-8 object-cover rounded-lg flex-shrink-0" />
+                        <div id="col-uno" className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                          <img src={cert.image} alt={cert.name} className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-lg flex-shrink-0" />
                           <div className="flex-1 min-w-0">
-                            <h3 className="text-md font-bold text-gray-900">{cert.name}</h3>
-                            <p className="text-xs text-gray-600">{cert.description}</p>
+                            <h3 className="text-base sm:text-lg font-bold text-gray-900">{cert.name}</h3>
+                            <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">{cert.description}</p>
                           </div>
                         </div>
 
                         {/* COL-DOS: Cálculo + Precio */}
                         {cert.subOptions && cert.selectedSubOptions && cert.selectedSubOptions.length > 0 ? (
-                          <div id="col-dos" className="flex items-center gap-4">
+                          <div id="col-dos" className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 pl-13 sm:pl-0">
                             {cert.selectedSubOptions.includes('copilot-enterprise') &&
                              cert.selectedSubOptions.includes('copilot-business') ? (
                               <>
-                                <p className="text-sm text-gray-600 text-right">
+                                <p className="text-xs sm:text-sm text-gray-600 sm:text-right">
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20} licencias Enterprise × $39 +{' '}
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20} licencias Business × $19
                                 </p>
-                                <p className="text-2xl font-bold text-[#4C26C7] flex-shrink-0 min-w-[120px] text-right">
+                                <p className="text-xl sm:text-2xl font-bold text-[#4C26C7] flex-shrink-0 sm:min-w-[120px] sm:text-right">
                                   {formatPrice(
                                     (cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20) * 39 +
                                     (cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20) * 19
@@ -352,11 +352,11 @@ function App() {
                             ) : cert.selectedSubOptions.includes('code-security') &&
                                    cert.selectedSubOptions.includes('secret-security') ? (
                               <>
-                                <p className="text-sm text-gray-600 text-right">
+                                <p className="text-xs sm:text-sm text-gray-600 sm:text-right">
                                   Máximo entre {cert.subOptions?.find(opt => opt.id === 'code-security')?.licenses || 30} y{' '}
                                   {cert.subOptions?.find(opt => opt.id === 'secret-security')?.licenses || 50} licencias × $49
                                 </p>
-                                <p className="text-2xl font-bold text-[#4C26C7] flex-shrink-0 min-w-[120px] text-right">
+                                <p className="text-xl sm:text-2xl font-bold text-[#4C26C7] flex-shrink-0 sm:min-w-[120px] sm:text-right">
                                   {formatPrice(
                                     Math.max(
                                       cert.subOptions?.find(opt => opt.id === 'code-security')?.licenses || 30,
@@ -370,11 +370,11 @@ function App() {
                                 const option = cert.subOptions!.find(opt => opt.id === optionId);
                                 if (!option) return null;
                                 return (
-                                  <div key={optionId} className="flex items-center gap-4">
-                                    <p className="text-sm text-gray-600 text-right">
+                                  <div key={optionId} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                                    <p className="text-xs sm:text-sm text-gray-600 sm:text-right">
                                       {option.licenses || 20} licencias × {formatPrice(option.pricePerLicense)}
                                     </p>
-                                    <p className="text-2xl font-bold text-[#4C26C7] flex-shrink-0 min-w-[120px] text-right">
+                                    <p className="text-xl sm:text-2xl font-bold text-[#4C26C7] flex-shrink-0 sm:min-w-[120px] sm:text-right">
                                       {formatPrice((option.licenses || 20) * option.pricePerLicense)}
                                     </p>
                                   </div>
@@ -383,11 +383,11 @@ function App() {
                             )}
                           </div>
                         ) : (
-                          <div id="col-dos" className="flex items-center gap-4">
-                            <p className="text-sm text-gray-600 text-right">
+                          <div id="col-dos" className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 pl-13 sm:pl-0">
+                            <p className="text-xs sm:text-sm text-gray-600 sm:text-right">
                               {cert.licenses} licencias × {formatPrice(cert.pricePerLicense)}
                             </p>
-                            <p className="text-2xl font-bold text-[#4C26C7] flex-shrink-0 min-w-[120px] text-right">
+                            <p className="text-xl sm:text-2xl font-bold text-[#4C26C7] flex-shrink-0 sm:min-w-[120px] sm:text-right">
                               {formatPrice(cert.licenses * cert.pricePerLicense)}
                             </p>
                           </div>
@@ -401,23 +401,23 @@ function App() {
 
             {/* Right Column - Price Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-3xl shadow-lg p-6 sticky top-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-6">Total a Pagar</h2>
+              <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-4 sm:p-6 lg:sticky lg:top-6">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Total a Pagar</h2>
 
-                <div className="space-y-4 mb-6">
-                  <div className="flex justify-between text-base">
+                <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
+                  <div className="flex justify-between text-sm sm:text-base">
                     <span className="text-gray-600">Subtotal</span>
                     <span className="font-semibold text-gray-900">{formatPrice(totals.subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-base">
+                  <div className="flex justify-between text-sm sm:text-base">
                     <span className="text-gray-600">IVA (19%)</span>
                     <span className="font-semibold text-gray-900">{formatPrice(totals.tax)}</span>
                   </div>
-                  <div className="flex justify-between text-xl font-bold border-t pt-4">
+                  <div className="flex justify-between text-base sm:text-xl font-bold border-t pt-3 sm:pt-4">
                     <span className="text-gray-900">Total</span>
                     <span className="text-[#4C26C7]">{formatPrice(totals.total)}</span>
                   </div>
-                  <div className="text-sm text-gray-500 text-right">
+                  <div className="text-xs sm:text-sm text-gray-500 text-right">
                     Total de licencias: {totals.totalLicenses}
                   </div>
                 </div>
@@ -426,24 +426,24 @@ function App() {
                 <div className="space-y-3 mb-6">
                   <button
                     onClick={handleConfirmQuotation}
-                    className="w-full bg-[#4C26C7] hover:bg-[#4C26C7]/90 text-white font-semibold py-4 px-6 rounded-2xl transition-colors"
+                    className="w-full bg-[#4C26C7] hover:bg-[#4C26C7]/90 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-2xl transition-colors text-sm sm:text-base"
                   >
                     Confirmar y Enviar Cotización
                   </button>
                   <button
                     onClick={handleBackToQuotation}
-                    className="w-full border border-gray-300 hover:border-gray-400 text-gray-700 font-semibold py-4 px-6 rounded-2xl transition-colors"
+                    className="w-full border border-gray-300 hover:border-gray-400 text-gray-700 font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-2xl transition-colors text-sm sm:text-base"
                   >
                     Modificar Selección
                   </button>
                 </div>
 
                 {/* Additional Info */}
-                <div className="p-4 bg-blue-50 rounded-xl">
-                  <p className="text-sm text-gray-700 mb-2">
+                <div className="p-3 sm:p-4 bg-blue-50 rounded-xl">
+                  <p className="text-xs sm:text-sm text-gray-700 mb-2">
                     <strong>Incluye:</strong>
                   </p>
-                  <ul className="text-sm text-gray-600 space-y-1">
+                  <ul className="text-xs sm:text-sm text-gray-600 space-y-1">
                     <li>• Capacitación del servicio</li>
                     <li>• Soporte posterior a la compra</li>
                     <li>• Asesoría personalizada</li>
