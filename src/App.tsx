@@ -456,7 +456,7 @@ function App() {
                     <span className="text-white font-bold text-sm">LL</span>
                   </div>
                   <div>
-                    <span className="text-xl font-bold">LLMApp</span>
+                    <span className="text-xl font-bold">Cotizador</span>
                     <span className="text-gray-400 text-sm ml-2">by CleverIT</span>
                   </div>
                 </div>
