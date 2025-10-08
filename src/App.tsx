@@ -338,7 +338,7 @@ function App() {
                             {cert.selectedSubOptions.includes('copilot-enterprise') &&
                              cert.selectedSubOptions.includes('copilot-business') ? (
                               <>
-                                <p className="text-sm text-gray-600 text-right flex">
+                                <p className="text-sm text-gray-600 text-right flex-1">
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20} licencias Enterprise × $39 +{' '}
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20} licencias Business × $19
                                 </p>
