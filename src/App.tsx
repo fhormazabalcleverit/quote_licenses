@@ -322,7 +322,7 @@ function App() {
                 <div className="space-y-6">
                   {enabledCertifications.map((cert) => (
                     <div key={cert.id} className="border border-gray-200 rounded-xl p-6">
-                      <div className="flex items-center gap-4 mb-4">
+                      <div className="flex items-center gap-4 mb-4 border-2 border-red-500">
                         <img src={cert.image} alt={cert.name} className="w-10 h-10 object-cover rounded-lg flex-shrink-0" />
                         <div className="flex-1 min-w-0">
                           <h3 className="text-lg font-bold text-gray-900">{cert.name}</h3>
