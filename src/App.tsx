@@ -322,7 +322,7 @@ function App() {
                 <div className="space-y-6">
                   {enabledCertifications.map((cert) => (
                     <div key={cert.id} className="border border-gray-200 rounded-xl p-6">
-                      <div className="flex items-start gap-4">
+                      <div className="flex items-start gap-4 mb-4">
                         <img src={cert.image} alt={cert.name} className="w-8 h-8 object-cover rounded-lg" />
                         <div className="flex-1">
                           <h3 className="text-lg font-bold text-gray-900">{cert.name}</h3>
@@ -331,19 +331,17 @@ function App() {
                       </div>
 
                       {cert.subOptions && cert.selectedSubOptions && cert.selectedSubOptions.length > 0 ? (
-                        <div className="space-y-3 mt-4">
+                        <div className="space-y-3">
                           {cert.selectedSubOptions.includes('copilot-enterprise') &&
                            cert.selectedSubOptions.includes('copilot-business') ? (
-                            <div className="bg-gray-50 rounded-lg p-4 flex items-start justify-between gap-4">
-                              <div className="flex-1">
-                                <p className="font-semibold text-gray-900 mb-2">Combo: Enterprise + Business</p>
+                            <div className="bg-white rounded-lg border border-gray-100 p-4">
+                              <p className="font-semibold text-gray-900 mb-3">Combo: Enterprise + Business</p>
+                              <div className="flex items-center justify-between">
                                 <p className="text-sm text-gray-600">
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20} licencias Enterprise × $39 +{' '}
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20} licencias Business × $19
                                 </p>
-                              </div>
-                              <div className="text-right flex-shrink-0">
-                                <p className="text-lg font-bold text-[#4C26C7]">
+                                <p className="text-lg font-bold text-[#4C26C7] ml-4">
                                   {formatPrice(
                                     (cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20) * 39 +
                                     (cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20) * 19
@@ -353,16 +351,14 @@ function App() {
                             </div>
                           ) : cert.selectedSubOptions.includes('code-security') &&
                                  cert.selectedSubOptions.includes('secret-security') ? (
-                            <div className="bg-gray-50 rounded-lg p-4 flex items-start justify-between gap-4">
-                              <div className="flex-1">
-                                <p className="font-semibold text-gray-900 mb-2">Combo: Code + Secret Security</p>
+                            <div className="bg-white rounded-lg border border-gray-100 p-4">
+                              <p className="font-semibold text-gray-900 mb-3">Combo: Code + Secret Security</p>
+                              <div className="flex items-center justify-between">
                                 <p className="text-sm text-gray-600">
                                   Máximo entre {cert.subOptions?.find(opt => opt.id === 'code-security')?.licenses || 30} y{' '}
                                   {cert.subOptions?.find(opt => opt.id === 'secret-security')?.licenses || 50} licencias × $49
                                 </p>
-                              </div>
-                              <div className="text-right flex-shrink-0">
-                                <p className="text-lg font-bold text-[#4C26C7]">
+                                <p className="text-lg font-bold text-[#4C26C7] ml-4">
                                   {formatPrice(
                                     Math.max(
                                       cert.subOptions?.find(opt => opt.id === 'code-security')?.licenses || 30,
@@ -377,15 +373,13 @@ function App() {
                               const option = cert.subOptions!.find(opt => opt.id === optionId);
                               if (!option) return null;
                               return (
-                                <div key={optionId} className="bg-gray-50 rounded-lg p-4 flex items-start justify-between gap-4">
-                                  <div className="flex-1">
-                                    <p className="font-semibold text-gray-900 mb-1">{option.name}</p>
+                                <div key={optionId} className="bg-white rounded-lg border border-gray-100 p-4">
+                                  <p className="font-semibold text-gray-900 mb-3">{option.name}</p>
+                                  <div className="flex items-center justify-between">
                                     <p className="text-sm text-gray-600">
                                       {option.licenses || 20} licencias × {formatPrice(option.pricePerLicense)}
                                     </p>
-                                  </div>
-                                  <div className="text-right flex-shrink-0">
-                                    <p className="text-lg font-bold text-[#4C26C7]">
+                                    <p className="text-lg font-bold text-[#4C26C7] ml-4">
                                       {formatPrice((option.licenses || 20) * option.pricePerLicense)}
                                     </p>
                                   </div>
@@ -395,14 +389,12 @@ function App() {
                           )}
                         </div>
                       ) : (
-                        <div className="bg-gray-50 rounded-lg p-4 mt-4 flex items-start justify-between gap-4">
-                          <div className="flex-1">
+                        <div className="bg-white rounded-lg border border-gray-100 p-4">
+                          <div className="flex items-center justify-between">
                             <p className="text-sm text-gray-600">
                               {cert.licenses} licencias × {formatPrice(cert.pricePerLicense)}
                             </p>
-                          </div>
-                          <div className="text-right flex-shrink-0">
-                            <p className="text-lg font-bold text-[#4C26C7]">
+                            <p className="text-lg font-bold text-[#4C26C7] ml-4">
                               {formatPrice(cert.licenses * cert.pricePerLicense)}
                             </p>
                           </div>
