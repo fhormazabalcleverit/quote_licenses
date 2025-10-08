@@ -383,7 +383,7 @@ function App() {
                             )}
                           </div>
                         ) : (
-                          <div id="col-dos" className="flex-1 items-center gap-4">
+                          <div id="col-dos" className="flex items-center gap-4">
                             <p className="text-sm text-gray-600 text-right">
                               {cert.licenses} licencias × {formatPrice(cert.pricePerLicense)}
                             </p>
