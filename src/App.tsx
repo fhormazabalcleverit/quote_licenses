@@ -334,15 +334,15 @@ function App() {
 
                         {/* COL-DOS: Cálculo + Precio */}
                         {cert.subOptions && cert.selectedSubOptions && cert.selectedSubOptions.length > 0 ? (
-                          <div id="col-dos" className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 pl-13 sm:pl-0">
+                          <div id="col-dos" className="flex flex-col gap-1 pl-13 sm:pl-0 sm:text-right sm:items-end">
                             {cert.selectedSubOptions.includes('copilot-enterprise') &&
                              cert.selectedSubOptions.includes('copilot-business') ? (
                               <>
-                                <p className="text-xs sm:text-sm text-gray-600 sm:text-right">
+                                <p className="text-xs sm:text-sm text-gray-600">
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20} licencias Enterprise × $39 +{' '}
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20} licencias Business × $19
                                 </p>
-                                <p className="text-xl sm:text-2xl font-bold text-[#4C26C7] flex-shrink-0 sm:min-w-[120px] sm:text-right">
+                                <p className="text-xl sm:text-2xl font-bold text-[#4C26C7]">
                                   {formatPrice(
                                     (cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20) * 39 +
                                     (cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20) * 19
@@ -352,11 +352,11 @@ function App() {
                             ) : cert.selectedSubOptions.includes('code-security') &&
                                    cert.selectedSubOptions.includes('secret-security') ? (
                               <>
-                                <p className="text-xs sm:text-sm text-gray-600 sm:text-right">
+                                <p className="text-xs sm:text-sm text-gray-600">
                                   Máximo entre {cert.subOptions?.find(opt => opt.id === 'code-security')?.licenses || 30} y{' '}
                                   {cert.subOptions?.find(opt => opt.id === 'secret-security')?.licenses || 50} licencias × $49
                                 </p>
-                                <p className="text-xl sm:text-2xl font-bold text-[#4C26C7] flex-shrink-0 sm:min-w-[120px] sm:text-right">
+                                <p className="text-xl sm:text-2xl font-bold text-[#4C26C7]">
                                   {formatPrice(
                                     Math.max(
                                       cert.subOptions?.find(opt => opt.id === 'code-security')?.licenses || 30,
@@ -370,11 +370,11 @@ function App() {
                                 const option = cert.subOptions!.find(opt => opt.id === optionId);
                                 if (!option) return null;
                                 return (
-                                  <div key={optionId} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                                    <p className="text-xs sm:text-sm text-gray-600 sm:text-right">
+                                  <div key={optionId} className="flex flex-col gap-1">
+                                    <p className="text-xs sm:text-sm text-gray-600">
                                       {option.licenses || 20} licencias × {formatPrice(option.pricePerLicense)}
                                     </p>
-                                    <p className="text-xl sm:text-2xl font-bold text-[#4C26C7] flex-shrink-0 sm:min-w-[120px] sm:text-right">
+                                    <p className="text-xl sm:text-2xl font-bold text-[#4C26C7]">
                                       {formatPrice((option.licenses || 20) * option.pricePerLicense)}
                                     </p>
                                   </div>
@@ -383,11 +383,11 @@ function App() {
                             )}
                           </div>
                         ) : (
-                          <div id="col-dos" className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 pl-13 sm:pl-0">
-                            <p className="text-xs sm:text-sm text-gray-600 sm:text-right">
+                          <div id="col-dos" className="flex flex-col gap-1 pl-13 sm:pl-0 sm:text-right sm:items-end">
+                            <p className="text-xs sm:text-sm text-gray-600">
                               {cert.licenses} licencias × {formatPrice(cert.pricePerLicense)}
                             </p>
-                            <p className="text-xl sm:text-2xl font-bold text-[#4C26C7] flex-shrink-0 sm:min-w-[120px] sm:text-right">
+                            <p className="text-xl sm:text-2xl font-bold text-[#4C26C7]">
                               {formatPrice(cert.licenses * cert.pricePerLicense)}
                             </p>
                           </div>
