@@ -322,41 +322,41 @@ function App() {
                 <div className="space-y-6">
                   {enabledCertifications.map((cert) => (
                     <div key={cert.id} className="border border-gray-200 rounded-xl p-6">
-                      <div id="col-uno" className="flex items-center gap-4 mb-4 border-2 border-red-500 col-1">
-                        <img src={cert.image} alt={cert.name} className="w-10 h-10 object-cover rounded-lg flex-shrink-0" />
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-bold text-gray-900">{cert.name}</h3>
-                          <p className="text-sm text-gray-600">{cert.description}</p>
+                      <div className="flex items-center gap-6">
+                        {/* COL-UNO: Logo + Título/Descripción */}
+                        <div id="col-uno" className="flex items-center gap-4 flex-1 min-w-0">
+                          <img src={cert.image} alt={cert.name} className="w-12 h-12 object-cover rounded-lg flex-shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-lg font-bold text-gray-900">{cert.name}</h3>
+                            <p className="text-sm text-gray-600">{cert.description}</p>
+                          </div>
                         </div>
-                      </div>
 
-                      {cert.subOptions && cert.selectedSubOptions && cert.selectedSubOptions.length > 0 ? (
-                        <div className="space-y-3">
-                          {cert.selectedSubOptions.includes('copilot-enterprise') &&
-                           cert.selectedSubOptions.includes('copilot-business') ? (
-                            <div id="col-dos" className="bg-white rounded-lg border border-gray-100 p-4 border-2 border-green-500 col-2">
-                              <div className="flex items-center justify-between gap-4">
-                                <p className="text-sm text-gray-600 flex-1">
+                        {/* COL-DOS: Cálculo + Precio */}
+                        {cert.subOptions && cert.selectedSubOptions && cert.selectedSubOptions.length > 0 ? (
+                          <div id="col-dos" className="flex items-center gap-4">
+                            {cert.selectedSubOptions.includes('copilot-enterprise') &&
+                             cert.selectedSubOptions.includes('copilot-business') ? (
+                              <>
+                                <p className="text-sm text-gray-600 text-right">
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20} licencias Enterprise × $39 +{' '}
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20} licencias Business × $19
                                 </p>
-                                <p className="text-xl font-bold text-[#4C26C7] flex-shrink-0">
+                                <p className="text-2xl font-bold text-[#4C26C7] flex-shrink-0 min-w-[120px] text-right">
                                   {formatPrice(
                                     (cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20) * 39 +
                                     (cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20) * 19
                                   )}
                                 </p>
-                              </div>
-                            </div>
-                          ) : cert.selectedSubOptions.includes('code-security') &&
-                                 cert.selectedSubOptions.includes('secret-security') ? (
-                            <div className="bg-white rounded-lg border border-gray-100 p-4">
-                              <div className="flex items-center justify-between gap-4">
-                                <p className="text-sm text-gray-600 flex-1">
+                              </>
+                            ) : cert.selectedSubOptions.includes('code-security') &&
+                                   cert.selectedSubOptions.includes('secret-security') ? (
+                              <>
+                                <p className="text-sm text-gray-600 text-right">
                                   Máximo entre {cert.subOptions?.find(opt => opt.id === 'code-security')?.licenses || 30} y{' '}
                                   {cert.subOptions?.find(opt => opt.id === 'secret-security')?.licenses || 50} licencias × $49
                                 </p>
-                                <p className="text-xl font-bold text-[#4C26C7] flex-shrink-0">
+                                <p className="text-2xl font-bold text-[#4C26C7] flex-shrink-0 min-w-[120px] text-right">
                                   {formatPrice(
                                     Math.max(
                                       cert.subOptions?.find(opt => opt.id === 'code-security')?.licenses || 30,
@@ -364,39 +364,35 @@ function App() {
                                     ) * 49
                                   )}
                                 </p>
-                              </div>
-                            </div>
-                          ) : (
-                            cert.selectedSubOptions.map((optionId) => {
-                              const option = cert.subOptions!.find(opt => opt.id === optionId);
-                              if (!option) return null;
-                              return (
-                                <div key={optionId} className="bg-white rounded-lg border border-gray-100 p-4">
-                                  <div className="flex items-center justify-between gap-4">
-                                    <p className="text-sm text-gray-600 flex-1">
+                              </>
+                            ) : (
+                              cert.selectedSubOptions.map((optionId) => {
+                                const option = cert.subOptions!.find(opt => opt.id === optionId);
+                                if (!option) return null;
+                                return (
+                                  <div key={optionId} className="flex items-center gap-4">
+                                    <p className="text-sm text-gray-600 text-right">
                                       {option.licenses || 20} licencias × {formatPrice(option.pricePerLicense)}
                                     </p>
-                                    <p className="text-xl font-bold text-[#4C26C7] flex-shrink-0">
+                                    <p className="text-2xl font-bold text-[#4C26C7] flex-shrink-0 min-w-[120px] text-right">
                                       {formatPrice((option.licenses || 20) * option.pricePerLicense)}
                                     </p>
                                   </div>
-                                </div>
-                              );
-                            })
-                          )}
-                        </div>
-                      ) : (
-                        <div className="bg-white rounded-lg border border-gray-100 p-4">
-                          <div className="flex items-center justify-between gap-4">
-                            <p className="text-sm text-gray-600 flex-1">
+                                );
+                              })
+                            )}
+                          </div>
+                        ) : (
+                          <div id="col-dos" className="flex items-center gap-4">
+                            <p className="text-sm text-gray-600 text-right">
                               {cert.licenses} licencias × {formatPrice(cert.pricePerLicense)}
                             </p>
-                            <p className="text-xl font-bold text-[#4C26C7] flex-shrink-0">
+                            <p className="text-2xl font-bold text-[#4C26C7] flex-shrink-0 min-w-[120px] text-right">
                               {formatPrice(cert.licenses * cert.pricePerLicense)}
                             </p>
                           </div>
-                        </div>
-                      )}
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
