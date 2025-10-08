@@ -322,9 +322,9 @@ function App() {
                 <div className="space-y-6">
                   {enabledCertifications.map((cert) => (
                     <div key={cert.id} className="border border-gray-200 rounded-xl p-6">
-                      <div className="flex items-start gap-4 mb-4">
-                        <img src={cert.image} alt={cert.name} className="w-8 h-8 object-cover rounded-lg" />
-                        <div className="flex-1">
+                      <div className="flex items-center gap-4 mb-4">
+                        <img src={cert.image} alt={cert.name} className="w-10 h-10 object-cover rounded-lg flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
                           <h3 className="text-lg font-bold text-gray-900">{cert.name}</h3>
                           <p className="text-sm text-gray-600">{cert.description}</p>
                         </div>
@@ -335,13 +335,12 @@ function App() {
                           {cert.selectedSubOptions.includes('copilot-enterprise') &&
                            cert.selectedSubOptions.includes('copilot-business') ? (
                             <div className="bg-white rounded-lg border border-gray-100 p-4">
-                              <p className="font-semibold text-gray-900 mb-3">Combo: Enterprise + Business</p>
-                              <div className="flex items-center justify-between">
-                                <p className="text-sm text-gray-600">
+                              <div className="flex items-center justify-between gap-4">
+                                <p className="text-sm text-gray-600 flex-1">
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20} licencias Enterprise × $39 +{' '}
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20} licencias Business × $19
                                 </p>
-                                <p className="text-lg font-bold text-[#4C26C7] ml-4">
+                                <p className="text-xl font-bold text-[#4C26C7] flex-shrink-0">
                                   {formatPrice(
                                     (cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20) * 39 +
                                     (cert.subOptions?.find(opt => opt.id === 'copilot-business')?.licenses || 20) * 19
@@ -352,13 +351,12 @@ function App() {
                           ) : cert.selectedSubOptions.includes('code-security') &&
                                  cert.selectedSubOptions.includes('secret-security') ? (
                             <div className="bg-white rounded-lg border border-gray-100 p-4">
-                              <p className="font-semibold text-gray-900 mb-3">Combo: Code + Secret Security</p>
-                              <div className="flex items-center justify-between">
-                                <p className="text-sm text-gray-600">
+                              <div className="flex items-center justify-between gap-4">
+                                <p className="text-sm text-gray-600 flex-1">
                                   Máximo entre {cert.subOptions?.find(opt => opt.id === 'code-security')?.licenses || 30} y{' '}
                                   {cert.subOptions?.find(opt => opt.id === 'secret-security')?.licenses || 50} licencias × $49
                                 </p>
-                                <p className="text-lg font-bold text-[#4C26C7] ml-4">
+                                <p className="text-xl font-bold text-[#4C26C7] flex-shrink-0">
                                   {formatPrice(
                                     Math.max(
                                       cert.subOptions?.find(opt => opt.id === 'code-security')?.licenses || 30,
@@ -374,12 +372,11 @@ function App() {
                               if (!option) return null;
                               return (
                                 <div key={optionId} className="bg-white rounded-lg border border-gray-100 p-4">
-                                  <p className="font-semibold text-gray-900 mb-3">{option.name}</p>
-                                  <div className="flex items-center justify-between">
-                                    <p className="text-sm text-gray-600">
+                                  <div className="flex items-center justify-between gap-4">
+                                    <p className="text-sm text-gray-600 flex-1">
                                       {option.licenses || 20} licencias × {formatPrice(option.pricePerLicense)}
                                     </p>
-                                    <p className="text-lg font-bold text-[#4C26C7] ml-4">
+                                    <p className="text-xl font-bold text-[#4C26C7] flex-shrink-0">
                                       {formatPrice((option.licenses || 20) * option.pricePerLicense)}
                                     </p>
                                   </div>
@@ -390,11 +387,11 @@ function App() {
                         </div>
                       ) : (
                         <div className="bg-white rounded-lg border border-gray-100 p-4">
-                          <div className="flex items-center justify-between">
-                            <p className="text-sm text-gray-600">
+                          <div className="flex items-center justify-between gap-4">
+                            <p className="text-sm text-gray-600 flex-1">
                               {cert.licenses} licencias × {formatPrice(cert.pricePerLicense)}
                             </p>
-                            <p className="text-lg font-bold text-[#4C26C7] ml-4">
+                            <p className="text-xl font-bold text-[#4C26C7] flex-shrink-0">
                               {formatPrice(cert.licenses * cert.pricePerLicense)}
                             </p>
                           </div>
