@@ -331,7 +331,7 @@ function App() {
                       </div>
 
                       {cert.subOptions && cert.selectedSubOptions && cert.selectedSubOptions.length > 0 ? (
-                        <div className="space-y-3 border-2 border-green-500">
+                        <div className="space-y-3">
                           {cert.selectedSubOptions.includes('copilot-enterprise') &&
                            cert.selectedSubOptions.includes('copilot-business') ? (
                             <div className="bg-white rounded-lg border border-gray-100 p-4">
