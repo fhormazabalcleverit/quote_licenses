@@ -468,12 +468,12 @@ function App() {
                   className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
                 >
                   <Mail className="w-4 h-4" />
-                  info@llmaps.com
+                  cotizador@cleveritgroup.com
                 </a>
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
-                  LINK
+                  Site Maps
                 </h3>
                 <ul className="space-y-3">
                   <li>
