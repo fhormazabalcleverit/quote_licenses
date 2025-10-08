@@ -307,7 +307,7 @@ function App() {
           <div className="grid lg:grid-cols-3 gap-4 lg:gap-6">
             {/* Left Column - Summary */}
             <div className="lg:col-span-2 bg-white rounded-2xl sm:rounded-3xl shadow-lg p-4 sm:p-6 lg:p-8">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Resumen de tu cotización</h1>
+              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2">Resumen de tu cotización</h1>
               <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8">Revisa los detalles de tu selección antes de confirmar</p>
 
               {/* Contact Info */}
