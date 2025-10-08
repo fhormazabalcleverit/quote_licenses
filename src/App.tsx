@@ -334,7 +334,7 @@ function App() {
 
                         {/* COL-DOS: Cálculo + Precio */}
                         {cert.subOptions && cert.selectedSubOptions && cert.selectedSubOptions.length > 0 ? (
-                          <div id="col-dos" className="flex-1 items-center gap-4 border-2 border-green-500">
+                          <div id="col-dos" className="flex items-center gap-4 border-2 border-green-500">
                             {cert.selectedSubOptions.includes('copilot-enterprise') &&
                              cert.selectedSubOptions.includes('copilot-business') ? (
                               <>
