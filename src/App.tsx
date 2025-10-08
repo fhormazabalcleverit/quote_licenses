@@ -326,7 +326,7 @@ function App() {
                         {/* COL-UNO: Logo + Título/Descripción */}
                         <div id="col-uno" className="flex items-center gap-4 flex-1 min-w-0">
                           <img src={cert.image} alt={cert.name} className="w-8 h-8 object-cover rounded-lg flex-shrink-0" />
-                          <div className="flex-2 min-w-0">
+                          <div className="flex-1 min-w-0">
                             <h3 className="text-md font-bold text-gray-900">{cert.name}</h3>
                             <p className="text-xs text-gray-600">{cert.description}</p>
                           </div>
