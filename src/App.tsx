@@ -308,7 +308,7 @@ function App() {
             {/* Left Column - Summary */}
             <div className="lg:col-span-2 bg-white rounded-2xl sm:rounded-3xl shadow-lg p-4 sm:p-6 lg:p-8">
               <h1 className="text-lg sm:text-xl lg:text-xl font-bold text-gray-900 mb-2">Resumen de tu cotización</h1>
-              <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8">Revisa los detalles de tu selección antes de confirmar</p>
+              <p className="text-xs sm:text-base text-gray-600 mb-6 sm:mb-8">Revisa los detalles de tu selección antes de confirmar</p>
 
               {/* Contact Info */}
               <div className="mb-6 sm:mb-8 p-4 bg-gray-50 rounded-xl">
