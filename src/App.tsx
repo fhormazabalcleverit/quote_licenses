@@ -334,7 +334,7 @@ function App() {
                         <div className="space-y-3">
                           {cert.selectedSubOptions.includes('copilot-enterprise') &&
                            cert.selectedSubOptions.includes('copilot-business') ? (
-                            <div className="bg-white rounded-lg border border-gray-100 p-4">
+                            <div className="bg-white rounded-lg border border-gray-100 p-4 border-2 border-green-500">
                               <div className="flex items-center justify-between gap-4">
                                 <p className="text-sm text-gray-600 flex-1">
                                   {cert.subOptions?.find(opt => opt.id === 'copilot-enterprise')?.licenses || 20} licencias Enterprise × $39 +{' '}
