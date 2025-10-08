@@ -328,7 +328,7 @@ function App() {
                           <img src={cert.image} alt={cert.name} className="w-8 h-8 object-cover rounded-lg flex-shrink-0" />
                           <div className="flex-1 min-w-0">
                             <h3 className="text-lg font-bold text-gray-900">{cert.name}</h3>
-                            <p className="text-sm text-gray-600">{cert.description}</p>
+                            <p className="text-xs text-gray-600">{cert.description}</p>
                           </div>
                         </div>
 
