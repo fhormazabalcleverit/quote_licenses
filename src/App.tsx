@@ -324,7 +324,7 @@ function App() {
                     <div key={cert.id} className="border border-gray-200 rounded-xl p-6">
                       <div className="flex items-center gap-6">
                         {/* COL-UNO: Logo + Título/Descripción */}
-                        <div id="col-uno" className="flex items-center gap-4 flex-1 min-w-0">
+                        <div id="col-uno" className="flex´1 items-center gap-4 flex-1 min-w-0">
                           <img src={cert.image} alt={cert.name} className="w-12 h-12 object-cover rounded-lg flex-shrink-0" />
                           <div className="flex-1 min-w-0">
                             <h3 className="text-lg font-bold text-gray-900">{cert.name}</h3>
